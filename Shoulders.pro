@@ -27,11 +27,13 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     bezcoord.cpp \
     coubic.cpp \
-    shoulder.cpp
+    shoulder.cpp \
+    shoulderpaintarea.cpp
 
 HEADERS  += mainwindow.h \
     bezcoord.h \
     coubic.h \
-    shoulder.h
+    shoulder.h \
+    shoulderpaintarea.h
 
 FORMS    +=

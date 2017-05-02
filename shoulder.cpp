@@ -1,7 +1,4 @@
 #include "shoulder.h"
-#include <fstream>
-#include <iostream>
-#include <string>
 
 using namespace std;
 
@@ -43,9 +40,14 @@ Shoulder::Shoulder(bool l): m_left{l}
                 ix = (t % (X()*Y())) % X();
                 token = line.substr(0, pos);
                 line.erase(0, pos + delimiter.length());
-                m_data[iz][iy][ix] = atoi(line.c_str());
+                m_data[iz][iy][ix] = atoi(token.c_str());
                 t++;
             }
+            iz = t / (X()*Y());
+            iy = (t % (X()*Y())) / X();
+            ix = (t % (X()*Y())) % X();
+            m_data[iz][iy][ix] = atoi(line.c_str());
+            t++;
         }
     }
     dataFile.close();
@@ -62,4 +64,18 @@ Shoulder::~Shoulder()
         delete m_data[k];
     }
     delete m_data;
+}
+
+int ** Shoulder::GetSlice(int number) const
+{
+    int ** slice = new int*[Z()];
+    for (int iz = 0; iz < Z(); iz++)
+    {
+        slice[iz] = new int[X()];
+        for (int ix = 0; ix < X(); ix++)
+        {
+            slice[iz][ix] = m_data[iz][number][ix];
+        }
+    }
+    return slice;
 }
