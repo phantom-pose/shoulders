@@ -4,6 +4,8 @@ ShoulderPaintArea::ShoulderPaintArea(bool l, QWidget *parent) :
     QWidget(parent)
 {
     m_shoulder = new Shoulder(l);
+    setGeometry(0, 0,
+                SCALE*SIZE_X_VOXEL*X() + 1, SCALE*SIZE_Z_VOXEL*Z() + 1);
 }
 
 ShoulderPaintArea::~ShoulderPaintArea()
@@ -14,9 +16,6 @@ ShoulderPaintArea::~ShoulderPaintArea()
 void ShoulderPaintArea::paintEvent(QPaintEvent * event)
 {
     Q_UNUSED(event);
-    setGeometry(m_shoulder->Left() ? LEFT_AREA_BORDER : RIGHT_AREA_BORDER,
-                TOP_BORDER,
-                SCALE*SIZE_X_VOXEL*X() + 1, SCALE*SIZE_Z_VOXEL*Z() + 1);
     QPalette Pal(palette());
     Pal.setColor(QPalette::Background, Qt::white);
     setAutoFillBackground(true);
@@ -41,4 +40,18 @@ void ShoulderPaintArea::paintEvent(QPaintEvent * event)
         delete slice[iz];
     }
     delete slice;
+}
+
+void ShoulderPaintArea::DecSlice() {
+    if (m_nSlice > 0) {
+        m_nSlice--;
+        this->update();
+    }
+}
+
+void ShoulderPaintArea::IncSlice() {
+    if (m_nSlice < m_shoulder->Y() - 1) {
+        m_nSlice++;
+        this->update();
+    }
 }

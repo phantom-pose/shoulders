@@ -3,6 +3,10 @@
 #include <QMainWindow>
 #include <QLayout>
 #include "shoulderpaintarea.h"
+#include "shoulder.h"
+#include "shoulderwidget.h"
+
+int constexpr FULL_WIDTH = LEFT_AREA_BORDER + SCALE*SIZE_X_VOXEL*SIZE_X_LEFT + H_BORDER;
 
 class MainWindow : public QMainWindow
 {
@@ -12,13 +16,9 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-    QGridLayout * Layout() { return m_gridLayout; }
-    ShoulderPaintArea * GetLeft() { return m_leftShoulderArea; }
-    ShoulderPaintArea * GetRight() { return m_rightShoulderArea; }
-
 private:
     QWidget * m_centralWidget;
-    QGridLayout * m_gridLayout;
-    ShoulderPaintArea * m_leftShoulderArea;
-    ShoulderPaintArea * m_rightShoulderArea;
+    QLayout * m_layout;
+    ShoulderWidget * m_leftShoulder;
+    ShoulderWidget * m_rightShoulder;
 };

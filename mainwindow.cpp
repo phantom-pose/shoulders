@@ -5,14 +5,16 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     m_centralWidget = new QWidget(this);
     this->setCentralWidget( m_centralWidget );
-    m_gridLayout = new QGridLayout( m_centralWidget );
-    m_leftShoulderArea = new ShoulderPaintArea(true);
-    m_rightShoulderArea = new ShoulderPaintArea(false);
+    m_layout = new QHBoxLayout( m_centralWidget );
+    m_leftShoulder = new ShoulderWidget(true);
+    m_rightShoulder = new ShoulderWidget(false);
+    m_layout->addWidget(m_rightShoulder);
+    m_layout->addWidget(m_leftShoulder);
     setFixedSize(FULL_WIDTH,
-                 m_leftShoulderArea->Z() > m_rightShoulderArea->Z() ?
-                     SCALE * SIZE_Z_VOXEL * m_leftShoulderArea->Z() + 2*TOP_BORDER
+                 m_leftShoulder->Z() > m_rightShoulder->Z() ?
+                     m_leftShoulder->Z()
                    :
-                     SCALE * SIZE_Z_VOXEL * m_rightShoulderArea->Z() + 2*TOP_BORDER);
+                     m_rightShoulder->Z());
 }
 
 MainWindow::~MainWindow()
