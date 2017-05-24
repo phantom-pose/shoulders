@@ -3,6 +3,8 @@
 #include <memory>
 #include <fstream>
 #include <string>
+#include <vector>
+#include "bezcoord.h"
 
 char constexpr LEFT_FILENAME[]  = "cut/female/left_shoulder";
 char constexpr RIGHT_FILENAME[] = "cut/female/right_shoulder";
@@ -15,6 +17,7 @@ int constexpr SIZE_X_RIGHT = 48,
 int constexpr SIZE_X_VOXEL = 3,
               SIZE_Y_VOXEL = 3,
               SIZE_Z_VOXEL = 8;
+int constexpr BEZIER_LENGTH = 1000;
 
 class Size
 {
@@ -49,6 +52,7 @@ public:
     bool const & Left() const { return m_left; };
 
     int ** GetSlice(int) const;
+    std::vector<DecCoords2D*> GetBezierLine(double alpha, int x, int z) const;
 
 private:
     int*** m_data;

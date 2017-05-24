@@ -79,3 +79,16 @@ int ** Shoulder::GetSlice(int number) const
     }
     return slice;
 }
+
+vector<DecCoords2D*> Shoulder::GetBezierLine(double alpha, int x, int z) const
+{
+    vector<DecCoords2D*> line;
+    line.reserve(BEZIER_LENGTH);
+    for (int it = 0; it < BEZIER_LENGTH; it++)
+    {
+        line.push_back(FindPoint(alpha, static_cast<float>(it)/BEZIER_LENGTH,
+                             X()*SIZE_X_VOXEL, Z()*SIZE_Z_VOXEL,
+                             x*SIZE_X_VOXEL, z*SIZE_Z_VOXEL));
+    }
+    return line;
+}

@@ -16,12 +16,17 @@ public:
     virtual void paintEvent(QPaintEvent * event);
     void IncSlice();
     void DecSlice();
+    void IncFocusX();
+    void DecFocusX();
 
     int const & X() const { return m_shoulder->X(); };
     int const & Y() const { return m_shoulder->Y(); };
     int const & Z() const { return m_shoulder->Z(); };
+    bool const & Left() const { return m_shoulder->Left(); };
 
 private:
     Shoulder * m_shoulder;
     int m_nSlice = 40;
+    int m_focusX = 10;
+    int m_focusZ = 10;
 };

@@ -8,7 +8,7 @@
 double constexpr ALPHA_MIN = -0.1;
 double constexpr ALPHA_MAX = 3.0;
 double constexpr ALPHA_STEP = 0.001;
-double constexpr NORM_COEF = 2/3;
+double constexpr NORM_COEF = 2.0/3.0;
 
 class BezierCoords2D
 {
@@ -34,3 +34,22 @@ private:
     double m_tx;
     double m_tz;
 };
+
+class DecCoords2D
+{
+public:
+    DecCoords2D(double x, double z): m_x{x}, m_z{z}
+    {}
+
+    ~DecCoords2D()
+    {}
+
+    double x() { return m_x; }
+    double z() { return m_z; }
+
+private:
+    double m_x;
+    double m_z;
+};
+
+DecCoords2D * FindPoint(double alpha, double t, int sizeX, int sizeZ, double xt, double zt);

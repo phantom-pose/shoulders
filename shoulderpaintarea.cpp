@@ -40,6 +40,48 @@ void ShoulderPaintArea::paintEvent(QPaintEvent * event)
         delete slice[iz];
     }
     delete slice;
+    if (Left())
+    {
+        painter.fillRect(SCALE*SIZE_X_VOXEL*(m_focusX-1),
+                         SCALE*SIZE_Z_VOXEL*(Z() - m_focusZ),
+                         SCALE*SIZE_X_VOXEL, SCALE*SIZE_Z_VOXEL,
+                         QColor(200, 100, 100, 127));
+    }
+    else
+    {
+        painter.fillRect(SCALE*SIZE_X_VOXEL*(X() - m_focusX),
+                         SCALE*SIZE_Z_VOXEL*(Z() - m_focusZ),
+                         SCALE*SIZE_X_VOXEL, SCALE*SIZE_Z_VOXEL,
+                         QColor(200, 100, 100, 127));
+    }
+    BezierCoords2D * coords = BezierCoords2D::FindAlpha(X()*SIZE_X_VOXEL,
+                                                        Z()*SIZE_Z_VOXEL,
+                                                        m_focusX*SIZE_X_VOXEL,
+                                                        m_focusZ*SIZE_Z_VOXEL);
+    double alpha = coords->alpha();
+    auto line = m_shoulder->GetBezierLine(alpha, m_focusX, m_focusZ);
+    auto from = line.front();
+    for (auto &point : line)
+    {
+        if (m_shoulder->Left()) {
+            painter.drawLine(
+                        static_cast<int>(SCALE*from->x()),
+                        static_cast<int>(SCALE*Z()*SIZE_Z_VOXEL - SCALE*from->z()),
+                        static_cast<int>(SCALE*point->x()),
+                        static_cast<int>(SCALE*Z()*SIZE_Z_VOXEL - SCALE*point->z())
+                        );
+        } else {
+            painter.drawLine(
+                        static_cast<int>(SCALE*X()*SIZE_X_VOXEL - SCALE*from->x()),
+                        static_cast<int>(SCALE*Z()*SIZE_Z_VOXEL - SCALE*from->z()),
+                        static_cast<int>(SCALE*X()*SIZE_X_VOXEL - SCALE*point->x()),
+                        static_cast<int>(SCALE*Z()*SIZE_Z_VOXEL - SCALE*point->z())
+                        );
+        }
+        delete from;
+        from = point;
+    }
+    delete from;
 }
 
 void ShoulderPaintArea::DecSlice() {
@@ -52,6 +94,20 @@ void ShoulderPaintArea::DecSlice() {
 void ShoulderPaintArea::IncSlice() {
     if (m_nSlice < m_shoulder->Y() - 1) {
         m_nSlice++;
+        this->update();
+    }
+}
+
+void ShoulderPaintArea::DecFocusX() {
+    if (m_focusX > 0) {
+        m_focusX--;
+        this->update();
+    }
+}
+
+void ShoulderPaintArea::IncFocusX() {
+    if (m_focusX < m_shoulder->X()) {
+        m_focusX++;
         this->update();
     }
 }

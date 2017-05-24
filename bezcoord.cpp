@@ -1,7 +1,23 @@
-#include <iostream>
 #include "bezcoord.h"
 
 using namespace std;
+
+DecCoords2D * FindPoint(double alpha, double t, int sizeX, int sizeZ, double xt, double zt)
+{
+    //dlx - нормаль к плоскости, примыкающей к телу, dlz - к руке
+    double dlx = NORM_COEF*xt, dlz = NORM_COEF*zt;
+    double x1 = alpha*sizeX,
+            x2 = alpha*sizeX,
+            x3 = dlx,
+            x4 = 0;
+    double z1 = 0,
+            z2 = dlz,
+            z3 = alpha*sizeZ,
+            z4 = alpha*sizeZ;
+    DecCoords2D * point = new DecCoords2D(x1*(1-t)*(1-t)*(1-t) + 3*x2*(1-t)*(1-t)*t + 3*x3*(1-t)*t*t + x4*t*t*t,
+                                          z1*(1-t)*(1-t)*(1-t) + 3*z2*(1-t)*(1-t)*t + 3*z3*(1-t)*t*t + z4*t*t*t);
+    return point;
+}
 
 BezierCoords2D * BezierCoords2D::FindAlpha(int sizeX, int sizeZ, double xt, double zt)
 {

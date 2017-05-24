@@ -20,17 +20,21 @@ public:
     ~ShoulderWidget();
 
     int X() const { return SCALE * SIZE_X_VOXEL * m_paintArea->X(); };
-    int Z() const { return (SCALE * SIZE_Z_VOXEL * m_paintArea->Z() + 4*TOP_BORDER + BUTTON_HEIGHT); };
+    int Z() const { return (SCALE * SIZE_Z_VOXEL * m_paintArea->Z() + 5*TOP_BORDER + 2*BUTTON_HEIGHT); };
     int PaintX() const { return SCALE * SIZE_X_VOXEL * m_paintArea->X(); };
     int PaintZ() const { return SCALE * SIZE_Z_VOXEL * m_paintArea->Z(); };
 
 private slots:
     void SliceBack();
     void SliceForward();
+    void VoxelXBack();
+    void VoxelXForward();
 
 private:
     ShoulderPaintArea * m_paintArea;
     QPushButton * m_backButton;
     QPushButton * m_forwardButton;
+    QPushButton * m_bezierDecXButton;
+    QPushButton * m_bezierIncXButton;
 };
 
