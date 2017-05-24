@@ -18,6 +18,8 @@ public:
     void DecSlice();
     void IncFocusX();
     void DecFocusX();
+    void IncFocusZ();
+    void DecFocusZ();
 
     int const & X() const { return m_shoulder->X(); };
     int const & Y() const { return m_shoulder->Y(); };

@@ -6,7 +6,8 @@
 #include "shoulder.h"
 #include "shoulderwidget.h"
 
-int constexpr FULL_WIDTH = LEFT_AREA_BORDER + SCALE*SIZE_X_VOXEL*SIZE_X_LEFT + H_BORDER;
+int constexpr FULL_WIDTH = SCALE*SIZE_X_VOXEL*SIZE_X_RIGHT + 4*H_BORDER
+        + V_BUTTON_WIDTH + SCALE*SIZE_X_VOXEL*SIZE_X_LEFT + V_BUTTON_WIDTH + 40;
 
 class MainWindow : public QMainWindow
 {

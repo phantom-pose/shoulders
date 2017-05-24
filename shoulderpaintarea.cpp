@@ -4,8 +4,6 @@ ShoulderPaintArea::ShoulderPaintArea(bool l, QWidget *parent) :
     QWidget(parent)
 {
     m_shoulder = new Shoulder(l);
-    setGeometry(0, 0,
-                SCALE*SIZE_X_VOXEL*X() + 1, SCALE*SIZE_Z_VOXEL*Z() + 1);
 }
 
 ShoulderPaintArea::~ShoulderPaintArea()
@@ -108,6 +106,20 @@ void ShoulderPaintArea::DecFocusX() {
 void ShoulderPaintArea::IncFocusX() {
     if (m_focusX < m_shoulder->X()) {
         m_focusX++;
+        this->update();
+    }
+}
+
+void ShoulderPaintArea::DecFocusZ() {
+    if (m_focusZ > 0) {
+        m_focusZ--;
+        this->update();
+    }
+}
+
+void ShoulderPaintArea::IncFocusZ() {
+    if (m_focusZ < m_shoulder->Z()) {
+        m_focusZ++;
         this->update();
     }
 }
