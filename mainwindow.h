@@ -32,5 +32,6 @@ private:
     ShoulderWidget * m_leftShoulder;
     ShoulderWidget * m_rightShoulder;
 
-    void CalcAndDumpShoulder(int xsize, int zsize, std::ofstream &afile, std::ofstream &tfile);
+    void CalcAndDumpShoulder(int xsize, int zsize,
+                             char const afilename[], char const tfilename[]);
 };

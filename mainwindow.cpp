@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include <thread>
 
 using namespace std;
 
@@ -30,22 +31,28 @@ MainWindow::~MainWindow()
 
 void MainWindow::Calculate()
 {
-    ofstream aout, tout;
-    aout.open(ALPHA_RES_RIGHT_FILENAME);
-    tout.open(T_RES_RIGHT_FILENAME);
-    CalcAndDumpShoulder(m_rightShoulder->DataX(), m_rightShoulder->DataZ(), aout, tout);
-    aout.close();
-    tout.close();
-
-    aout.open(ALPHA_RES_LEFT_FILENAME);
-    tout.open(T_RES_LEFT_FILENAME);
-    CalcAndDumpShoulder(m_leftShoulder->DataX(), m_leftShoulder->DataZ(), aout, tout);
-    aout.close();
-    tout.close();
+    std::thread rightThread(&MainWindow::CalcAndDumpShoulder,
+                           this,
+                           m_rightShoulder->DataX(),
+                           m_rightShoulder->DataZ(),
+                           ALPHA_RES_RIGHT_FILENAME,
+                           T_RES_RIGHT_FILENAME);
+    std::thread leftThread(&MainWindow::CalcAndDumpShoulder,
+                           this,
+                           m_leftShoulder->DataX(),
+                           m_leftShoulder->DataZ(),
+                           ALPHA_RES_LEFT_FILENAME,
+                           T_RES_LEFT_FILENAME);
+    rightThread.join();
+    leftThread.join();
 }
 
-void MainWindow::CalcAndDumpShoulder(int xsize, int zsize, ofstream & afile, ofstream & tfile)
+void MainWindow::CalcAndDumpShoulder(int xsize, int zsize,
+                                     char const afilename[], char const tfilename[])
 {
+    ofstream aout, tout;
+    aout.open(afilename);
+    tout.open(tfilename);
     BezierCoords2D * coords;
     for (int ix = 0; ix < xsize; ix++)
     {
@@ -54,11 +61,13 @@ void MainWindow::CalcAndDumpShoulder(int xsize, int zsize, ofstream & afile, ofs
                                                SIZE_Z_VOXEL*zsize,
                                                SIZE_X_VOXEL*(ix+1),
                                                SIZE_Z_VOXEL*(iz+1));
-            afile << coords->alpha() << " ";
-            tfile << coords->t() << " ";
+            aout << coords->alpha() << " ";
+            tout << coords->t() << " ";
             delete coords;
         }
-        afile << "\n";
-        tfile << "\n";
+        aout << "\n";
+        tout << "\n";
     }
+    aout.close();
+    tout.close();
 }
