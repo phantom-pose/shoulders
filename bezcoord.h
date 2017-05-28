@@ -24,10 +24,10 @@ public:
 
     static BezierCoords2D * FindAlpha(int sizeX, int sizeZ, double xt, double zt);
 
-    double const & alpha() const { return m_alpha; };
-    double const & tx() const { return m_tx; };
-    double const & tz() const { return m_tz; };
-    double t() const { return (m_tx + m_tz)/2; };
+    double const & alpha() const { return m_alpha; }
+    double const & tx() const { return m_tx; }
+    double const & tz() const { return m_tz; }
+    double t() const { return (m_tx + m_tz)/2; }
 
 private:
     double m_alpha;

@@ -21,10 +21,11 @@ public:
     void IncFocusZ();
     void DecFocusZ();
 
-    int const & X() const { return m_shoulder->X(); };
-    int const & Y() const { return m_shoulder->Y(); };
-    int const & Z() const { return m_shoulder->Z(); };
-    bool const & Left() const { return m_shoulder->Left(); };
+    int const & X() const { return m_shoulder->X(); }
+    int const & Y() const { return m_shoulder->Y(); }
+    int const & Z() const { return m_shoulder->Z(); }
+    bool const & Left() const { return m_shoulder->Left(); }
+    int *** GetData() const { return m_shoulder->GetData(); }
 
 private:
     Shoulder * m_shoulder;

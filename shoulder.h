@@ -30,9 +30,9 @@ public:
     Size(int x,int y,int z): m_x{x}, m_y{y}, m_z{z}
     {}
 
-    int const & X() const { return m_x; };
-    int const & Y() const { return m_y; };
-    int const & Z() const { return m_z; };
+    int const & X() const { return m_x; }
+    int const & Y() const { return m_y; }
+    int const & Z() const { return m_z; }
 
 private:
     int const m_x;
@@ -50,12 +50,13 @@ public:
     int const & Y() const { return m_size->Y(); };
     int const & Z() const { return m_size->Z(); };
     bool const & Left() const { return m_left; };
+    int *** GetData() const { return m_data; };
 
     int ** GetSlice(int) const;
     std::vector<DecCoords2D*> GetBezierLine(double alpha, int x, int z) const;
 
 private:
-    int*** m_data;
+    int *** m_data;
     bool const m_left;
     std::shared_ptr<Size> m_size;
 };
