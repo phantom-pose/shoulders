@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include <thread>
+#include <QLabel>
 
 using namespace std;
 
@@ -15,9 +16,11 @@ MainWindow::MainWindow(QWidget *parent) :
     m_layout->addWidget(m_rightShoulder);
     m_layout->addWidget(m_leftShoulder);
     m_rightShoulder->resize(m_rightShoulder->X()+1, m_rightShoulder->Z()+1);
-    QPushButton * resultButton = new QPushButton("Calculate", this);
-    m_layout->addWidget(resultButton);
-    resultButton->setFixedSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+    QWidget * techArea = new QWidget(this);
+    techArea->setFixedWidth(TECH_WIDGET_WIDTH);
+    QPushButton * resultButton = new QPushButton("Calculate", techArea);
+    m_layout->addWidget(techArea);
+    resultButton->resize(BUTTON_WIDTH, BUTTON_HEIGHT);
     connect(resultButton, SIGNAL (released()), this, SLOT (Calculate()));
     setFixedSize(FULL_WIDTH,
                  m_leftShoulder->Z() > m_rightShoulder->Z() ?

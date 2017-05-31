@@ -8,8 +8,9 @@
 #include "shoulder.h"
 #include "shoulderwidget.h"
 
+int constexpr TECH_WIDGET_WIDTH = 120;
 int constexpr FULL_WIDTH = SCALE*SIZE_X_VOXEL*SIZE_X_RIGHT + 4*H_BORDER
-        + 2*V_BUTTON_WIDTH + SCALE*SIZE_X_VOXEL*SIZE_X_LEFT + BUTTON_WIDTH + 40;
+        + 2*V_BUTTON_WIDTH + SCALE*SIZE_X_VOXEL*SIZE_X_LEFT + TECH_WIDGET_WIDTH + 40;
 char constexpr ALPHA_RES_RIGHT_FILENAME[]  = "res/ar";
 char constexpr ALPHA_RES_LEFT_FILENAME[] = "res/al";
 char constexpr T_RES_RIGHT_FILENAME[]  = "res/tr";
