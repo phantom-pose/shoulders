@@ -35,9 +35,9 @@ void ShoulderPaintArea::paintEvent(QPaintEvent * event)
                                  QColor(200, 200, 100, 127));
             }
         }
-        delete slice[iz];
+        delete [] slice[iz];
     }
-    delete slice;
+    delete [] slice;
     if (Left())
     {
         painter.fillRect(SCALE*SIZE_X_VOXEL*(m_focusX-1),
@@ -57,6 +57,7 @@ void ShoulderPaintArea::paintEvent(QPaintEvent * event)
                                                         m_focusX*SIZE_X_VOXEL,
                                                         m_focusZ*SIZE_Z_VOXEL);
     double alpha = coords->alpha();
+    delete coords;
     auto line = m_shoulder->GetBezierLine(alpha, m_focusX, m_focusZ);
     auto from = line.front();
     for (auto &point : line)
@@ -76,10 +77,12 @@ void ShoulderPaintArea::paintEvent(QPaintEvent * event)
                         static_cast<int>(SCALE*Z()*SIZE_Z_VOXEL - SCALE*point->z())
                         );
         }
-        delete from;
         from = point;
     }
-    delete from;
+    for (auto &point : line)
+    {
+        delete point;
+    }
 }
 
 void ShoulderPaintArea::DecSlice() {

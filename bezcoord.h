@@ -3,6 +3,8 @@
 #include <cmath>
 #include <vector>
 #include <complex>
+#include <functional>
+#include "newt.h"
 #include "coubic.h"
 
 double constexpr ALPHA_MIN = -0.1;
