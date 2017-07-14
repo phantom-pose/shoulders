@@ -23,7 +23,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 CONFIG += c++14
-QMAKE_CXX_FLAGS += -fext-numeric-literals
 
 SOURCES += main.cpp\
         mainwindow.cpp \
@@ -31,13 +30,15 @@ SOURCES += main.cpp\
     coubic.cpp \
     shoulder.cpp \
     shoulderpaintarea.cpp \
-    shoulderwidget.cpp
+    shoulderwidget.cpp \
+    newt.cpp
 
 HEADERS  += mainwindow.h \
     bezcoord.h \
     coubic.h \
     shoulder.h \
     shoulderpaintarea.h \
-    shoulderwidget.h
+    shoulderwidget.h \
+    newt.h
 
 FORMS    +=
