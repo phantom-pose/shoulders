@@ -53,7 +53,7 @@ public:
     int *** GetData() const { return m_data; };
 
     int ** GetSlice(int) const;
-    std::vector<DecCoords2D*> GetBezierLine(double alpha, int x, int z) const;
+    std::vector<DecCoords2D*> GetBezierLine(double alpha) const;
 
 private:
     int *** m_data;

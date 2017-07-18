@@ -58,7 +58,7 @@ void ShoulderPaintArea::paintEvent(QPaintEvent * event)
                                                         m_focusZ*SIZE_Z_VOXEL);
     double alpha = coords->alpha();
     delete coords;
-    auto line = m_shoulder->GetBezierLine(alpha, m_focusX, m_focusZ);
+    auto line = m_shoulder->GetBezierLine(alpha);
     auto from = line.front();
     for (auto &point : line)
     {

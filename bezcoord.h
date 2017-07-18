@@ -54,4 +54,4 @@ private:
     double m_z;
 };
 
-DecCoords2D * FindPoint(double alpha, double t, int sizeX, int sizeZ, double xt, double zt);
+DecCoords2D * FindPoint(double alpha, double t, int sizeX, int sizeZ);

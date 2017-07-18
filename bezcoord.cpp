@@ -2,10 +2,11 @@
 
 using namespace std;
 
-DecCoords2D * FindPoint(double alpha, double t, int sizeX, int sizeZ, double xt, double zt)
+DecCoords2D * FindPoint(double alpha, double t, int sizeX, int sizeZ)
 {
     //dlx - нормаль к плоскости, примыкающей к телу, dlz - к руке
-    double dlx = NORM_COEF*xt, dlz = NORM_COEF*zt;
+    //double dlx = NORM_COEF*xt, dlz = NORM_COEF*zt;
+    double dlx = alpha*sizeX/2, dlz = alpha*sizeZ/2;
     double x1 = alpha*sizeX,
             x2 = alpha*sizeX,
             x3 = dlx,
@@ -21,9 +22,10 @@ DecCoords2D * FindPoint(double alpha, double t, int sizeX, int sizeZ, double xt,
 
 void f1(float * x, int n, float * fvec, float ** fjac, float xt, float zt, float sizeX, float sizeZ)
 {
-    double dlx = NORM_COEF*xt, dlz = NORM_COEF*zt;
+    //double dlx = NORM_COEF*xt, dlz = NORM_COEF*zt;
     float a = x[0];
     float t = x[1];
+    double dlx = a*sizeX/2, dlz = a*sizeZ/2;
     fvec[0] = t*t*t*(2*a*sizeX - 3*dlx) + t*t*(-3*a*sizeX + 3*dlx) + a*sizeX - xt;
     fvec[1] = t*t*t*(3*dlz - 2*a*sizeZ) + t*t*(-6*dlz + 3*a*sizeZ) +3*t*dlz - zt;
     fjac[0][0] = 2*t*t*t*sizeX -3*t*t*sizeX + sizeX;
